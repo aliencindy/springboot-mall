@@ -22,6 +22,18 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate npjt;
 
     @Override
+    public List<Product> getProducts() {
+        String sql = "SELECT product_id, product_name, category,image_url, price, stock, description, created_date,last_modified_date FROM product";
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<Product> productList = npjt.query(sql, map, new ProductRowMapper());
+
+        return productList;
+    }
+
+
+    @Override
     public Product getProductById(Integer productId) {
         String sql = "SELECT product_id, product_name, category,image_url," +
                 " price, stock, description, created_date,last_modified_date" +
@@ -70,8 +82,8 @@ public class ProductDaoImpl implements ProductDao {
                 "image_url=:imageUrl, price=:price, stock=:stock, description= :description, " +
                 "last_modified_date=:lastModifiedDate " +
                 "WHERE product_id=:productId;";
-        Map<String,Object> map = new HashMap<>();
-        map.put("productId",productId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
 
         map.put("productName", productRequest.getProductName());
         map.put("category", productRequest.getCategory().toString());// 注意這裡.toString()
@@ -80,7 +92,7 @@ public class ProductDaoImpl implements ProductDao {
         map.put("stock", productRequest.getStock());
         map.put("description", productRequest.getDescription());
         map.put("lastModifiedDate", new Date());
-        npjt.update(sql,map);
+        npjt.update(sql, map);
 
     }
 
@@ -88,10 +100,10 @@ public class ProductDaoImpl implements ProductDao {
     public void deleteProduct(Integer productId) {
         String sql = "DELETE FROM product WHERE product_id=:productId;";
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
-        map.put("productId",productId);
+        map.put("productId", productId);
 
-        npjt.update(sql,map);
+        npjt.update(sql, map);
     }
 }
