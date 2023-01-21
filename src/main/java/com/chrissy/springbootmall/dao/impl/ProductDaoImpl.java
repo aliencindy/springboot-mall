@@ -83,4 +83,15 @@ public class ProductDaoImpl implements ProductDao {
         npjt.update(sql,map);
 
     }
+
+    @Override
+    public void deleteProduct(Integer productId) {
+        String sql = "DELETE FROM product WHERE product_id=:productId;";
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("productId",productId);
+
+        npjt.update(sql,map);
+    }
 }
