@@ -62,7 +62,6 @@ public class ProductController {
         page.setTotal(total);
         page.setResults(productList);
 
-
         return ResponseEntity.status(HttpStatus.OK).body(page);
 
     }
