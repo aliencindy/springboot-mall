@@ -1,6 +1,8 @@
 package com.chrissy.springbootmall.dao.impl;
 
+import com.chrissy.springbootmall.constant.ProductCategory;
 import com.chrissy.springbootmall.dao.ProductDao;
+import com.chrissy.springbootmall.dto.ProductQueryParams;
 import com.chrissy.springbootmall.dto.ProductRequest;
 import com.chrissy.springbootmall.model.Product;
 import com.chrissy.springbootmall.rowmapper.ProductRowMapper;
@@ -22,10 +24,24 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate npjt;
 
     @Override
-    public List<Product> getProducts() {
-        String sql = "SELECT product_id, product_name, category,image_url, price, stock, description, created_date,last_modified_date FROM product";
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        String sql = "SELECT product_id, product_name, category,image_url, price, stock, " +
+                "description, created_date,last_modified_date " +
+                "FROM product WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
+
+
+        if(productQueryParams.getCategory()!=null){
+            sql = sql+ " AND category = :category";
+            map.put("category",productQueryParams.getCategory().name());
+        }
+
+        if (productQueryParams.getSearch()!=null){
+            sql = sql+" AND product_name LIKE :search";
+            map.put("search","%"+productQueryParams.getSearch()+"%");
+        }
+
 
         List<Product> productList = npjt.query(sql, map, new ProductRowMapper());
 

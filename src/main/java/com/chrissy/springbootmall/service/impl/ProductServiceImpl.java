@@ -1,6 +1,8 @@
 package com.chrissy.springbootmall.service.impl;
 
+import com.chrissy.springbootmall.constant.ProductCategory;
 import com.chrissy.springbootmall.dao.ProductDao;
+import com.chrissy.springbootmall.dto.ProductQueryParams;
 import com.chrissy.springbootmall.dto.ProductRequest;
 import com.chrissy.springbootmall.model.Product;
 import com.chrissy.springbootmall.service.ProductService;
@@ -15,8 +17,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override
