@@ -7,5 +7,6 @@ public interface UserService {
 
     Integer register(UserRegisterRequest userRegisterRequest);
 
-    User getById(Integer userId);
+    User getUserById(Integer userId);
+
 }
