@@ -1,6 +1,7 @@
 package com.chrissy.springbootmall.service.impl;
 
 import com.chrissy.springbootmall.dao.UserDao;
+import com.chrissy.springbootmall.dto.UserLoginRequest;
 import com.chrissy.springbootmall.dto.UserRegisterRequest;
 import com.chrissy.springbootmall.model.User;
 import com.chrissy.springbootmall.service.UserService;
@@ -35,5 +36,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+        if (user == null) {
+            log.warn("該 email {} 已被註冊。");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (userLoginRequest.getPassword().equals(user.getPassword())) {
+            return user;
+        } else {
+            log.warn("密碼輸入錯誤。");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
