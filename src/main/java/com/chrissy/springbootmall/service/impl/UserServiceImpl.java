@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
         // 檢查 user 是否存在
         if (user == null) {
-            log.warn("該 email {} 已被註冊。");
+            log.warn("該 email {} 尚未註冊。",userLoginRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         // 使用 MD5 生成密碼的雜湊值
