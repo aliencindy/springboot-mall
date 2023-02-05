@@ -1,6 +1,7 @@
 package com.chrissy.springbootmall.controller;
 
 import com.chrissy.springbootmall.dto.CreateOrderRequest;
+import com.chrissy.springbootmall.model.Order;
 import com.chrissy.springbootmall.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,8 @@ public class OrderController {
                                         @RequestBody @Valid CreateOrderRequest createOrderRequest) {
 
     Integer orderId = orderService.createOrder(userId,createOrderRequest);
-    return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+    Order order = orderService.getOrderById(orderId);
+    return ResponseEntity.status(HttpStatus.CREATED).body(order);
 
     }
 
