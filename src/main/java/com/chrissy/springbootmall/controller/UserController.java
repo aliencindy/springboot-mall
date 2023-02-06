@@ -20,8 +20,8 @@ public class UserController {
     private UserService userService;
 
 
-    //    @PostMapping("/users/register")
-//    public ResponseEntity<User> register(@RequestParam UserRegisterRequest userRegisterRequest) {
+//    @PostMapping("/users/register")
+//    public ResponseEntity<User> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
 //        Integer userId = userService.register(userRegisterRequest);
 //        User user = userService.getUserById(userId);
 //
