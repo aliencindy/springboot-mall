@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
 <body>
-<form method="post" action="/users/login">
+<!--觸發submit 時，form action 導至 /users/login 路徑-->
+<form th:action="@{/users/login}" method="post">
     <fieldset>
         <legend>Login</legend>
 
         <lable for="LoginEmail">Account:</lable>
         <br>
-        <input type="text" name="email" id="email"><br><br>
+        <input type="text" name="email" id="email" th:field="${userLoginRequest.email}"><br><br>
 
         <lable for="LoginPassword">Password:</lable>
         <br>
-        <input type="text" name="password" id="password"><br><br>
+        <input type="text" name="password" id="password" th:field="${userLoginRequest.password}"><br><br>
 
-        <input type="submit" value="submit" id="signup_btn">
+        <input type="submit" name="submit" value="submit">
     </fieldset>
 </form>
 </body>

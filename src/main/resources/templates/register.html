@@ -5,15 +5,16 @@
     <title>Register</title>
 </head>
 <body>
-<form method="post" action="/users/register">
+<form th:action="@{/users/register}" method="post">
     <fieldset>
+        <legend>Register</legend>
         <lable for="RegisterEmail">Account:</lable>
         <br>
-        <input type="text" name="email"><br><br>
+        <input type="text" name="email" th:field="${userRegisterRequest.email}"><br><br>
 
         <lable for="RegisterPassword">Password:</lable>
         <br>
-        <input type="text" name="password"><br><br>
+        <input type="text" name="password" th:field="${userRegisterRequest.password}"><br><br>
 
         <input type="submit" value="submit">
     </fieldset>
