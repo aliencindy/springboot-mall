@@ -61,8 +61,6 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Integer createOrder(Integer userId, Integer totalAmount) {
 
-        // 檢查 user 是否存在
-        
 
         // 創建訂單
         String sql = "INSERT INTO `order` " +

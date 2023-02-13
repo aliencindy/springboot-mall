@@ -125,6 +125,16 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public void updateStock(Integer stock,Integer productId) {
+        String sql = "UPDATE product SET stock = :stock,last_modified_date = :lastModifiedDate WHERE product_id = :productId";
+        Map<String,Object> map = new HashMap<>();
+        map.put("productId",productId);
+        map.put("lastModifiedDate",new Date());
+        map.put("stock",stock);
+        npjt.update(sql,map);
+    }
+
+    @Override
     public void deleteProduct(Integer productId) {
         String sql = "DELETE FROM product WHERE product_id=:productId;";
 
