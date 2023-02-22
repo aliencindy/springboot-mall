@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ThymeleafController {
-    @GetMapping("/SpringBootMall") // 首頁
+    @GetMapping("/index") // 首頁
     public String SpringBootMall() {
 
-        return "SpringBootMall";
+        return "index";
     }
 
     @GetMapping("/login") // 跳轉到登入畫面

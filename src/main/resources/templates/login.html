@@ -6,20 +6,127 @@
 </head>
 <body>
 <!--觸發submit 時，form action 導至 /users/login 路徑-->
-<form th:action="@{/users/login}" method="post">
+<form th:action="@{/users/login}" method="post" id="myForm" encType="application/json">
     <fieldset>
         <legend>Login</legend>
 
-        <lable for="LoginEmail">Account:</lable>
+        <lable for="LoginEmail">Email:</lable>
         <br>
-        <input type="text" name="email" id="email" th:field="${userLoginRequest.email}"><br><br>
+        <input type="email" name="email" id="email" placeholder="請輸入註冊信箱" th:field="${userLoginRequest.email}" required/><br><br>
 
         <lable for="LoginPassword">Password:</lable>
         <br>
-        <input type="text" name="password" id="password" th:field="${userLoginRequest.password}"><br><br>
+        <input type="password" name="password" id="password" placeholder="請輸入註冊密碼" th:field="${userLoginRequest.password}" required/><br><br>
 
-        <input type="submit" name="submit" value="submit">
+
+        <input type="submit" name="submit" value="submit" id="submit"/>
     </fieldset>
 </form>
+<script>
+    // $("input[name='submit']").click(function () {
+    //     let json_string = "{email: 'test@gmail.com',password: '1234'}";
+    //     let data = JSON.parse(json_string);
+    // });
+
+    // $.ajax({
+    //     url: '/users/login',            // url位置
+    //     type: 'post',                   // post/get
+    //     data: {email: "test27@gmail.com", password: "1234"},    // 輸入的資料
+    //     dataType: "json",
+    //     contentType: "application/json"
+    // });
+
+    // let item = {
+    //     'url': '/users/login',
+    //     'type': 'POST',
+    //     'headers': {
+    //         // 'Content-Type': 'multipart/form-data',
+    //         // 使用 multipart/form-data 在此不需要設定 Content-Type。
+    //         'X-Requested-With': 'XMLHttpRequest'
+    //     },
+    //     'contentType': false, //required
+    //     'processData': false, // required
+    //     'mimeType': 'multipart/form-data',
+    //     'data': {email: "test27@gmail.com", password: "1234"}
+    // }
+    //
+    // $.ajax(item)
+
+    // // 宣告變數儲存物件（將使用者輸入的資料寫入）
+    // let account = `{
+    //     email: 'abc123@gmail.com',
+    //     password: '1234'
+    // }`;
+    //
+    // // xhr
+    // let xhr = new XMLHttpResquest();
+    // xhr.open('post','伺服器URL',true);
+    // // 傳送資料的格式選擇為 JSON
+    // xhr.setRequestHeader('Content-type', 'application/json');
+    // // 用另一個變數儲存字串化的 JSON
+    // let data = JSON.stringify(account);
+    // // 傳送
+    // xhr.send(data);
+
+
+    // const form = document.getElementById('myForm');
+    //
+    // form.addEventListener('submit', (event) => {
+    //     event.preventDefault();
+    //
+    //     const formData = new FormData(form);
+    //     const data = {};
+    //
+    //     formData.forEach((value, key) => {
+    //         data[key] = value;
+    //     });
+    //
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.open('POST', 'http://localhost:8090/users/login', true);
+    //     xhr.setRequestHeader('Content-Type', 'application/json');
+    //
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+    //             console.log(xhr.responseText);
+    //         }
+    //     };
+    //
+    //     xhr.send(JSON.stringify(data));
+    // });
+
+    // $('#myForm').submit(function (event) {
+    //     event.preventDefault();
+    //
+    //     const formData = $(this).serialize();
+    //
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: 'http://localhost:8090/users/login',
+    //         data: formData,
+    //         success: function (data) {
+    //             console.log(data);
+    //         },
+    //         contentType: "application/json; charset=utf-8",
+    //     });
+    // });
+
+
+
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/users/login',
+    //     contentType: 'application/json',
+    //     data: formData,
+    //     success: function (data) {
+    //         console.log('Success: ', data);
+    //     },
+    //     error: function (error) {
+    //         console.log('Error: ', error);
+    //     }
+    // });
+
+
+
+</script>
 </body>
 </html>

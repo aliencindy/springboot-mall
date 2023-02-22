@@ -9,6 +9,8 @@ public class UserRegisterRequest {
     private String email;
     @NotBlank
     private String password;
+    @NotBlank
+    private String userAuth;
 
     public String getEmail() {
         return email;
@@ -24,5 +26,13 @@ public class UserRegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserAuth() {
+        return userAuth;
+    }
+
+    public void setUserAuth(String userAuth) {
+        this.userAuth = userAuth;
     }
 }

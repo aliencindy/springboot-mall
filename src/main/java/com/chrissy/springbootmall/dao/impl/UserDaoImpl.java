@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,14 +23,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer createUser(UserRegisterRequest userRegisterRequest) {
-        String sql = "INSERT INTO user (email,password,created_date,last_modified_date) " +
-                "VALUES (:email,:password,:createdDate,:lastModifiedDate)";
+        String sql = "INSERT INTO user (email,password,user_auth) " +
+                "VALUES (:email,:password,:userAuth)";
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("email", userRegisterRequest.getEmail());
         map.put("password", userRegisterRequest.getPassword());
-        map.put("createdDate", new Date());
-        map.put("lastModifiedDate", new Date());
+        map.put("userAuth",userRegisterRequest.getUserAuth());
+
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         npjt.update(sql, new MapSqlParameterSource(map), keyHolder);
@@ -42,8 +41,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(Integer userId) {
-        String sql = "SELECT user_id,email,password,created_date,last_modified_date " +
-                "FROM user WHERE user_id=:userId";
+        String sql = "SELECT u.user_id,u.email,u.password,a.auth " +
+                "FROM user u " +
+                "JOIN auth a " +
+                "ON u.user_auth = a.`authorization` " +
+                "WHERE u.user_id=:userId";
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("userId", userId);
@@ -60,8 +62,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByEmail(String email) {
-        String sql = "SELECT user_id,email,password,created_date,last_modified_date " +
-                "FROM user WHERE email=:email";
+        String sql = "SELECT u.user_id,u.email,u.password,a.auth " +
+                "FROM user u " +
+                "JOIN auth a " +
+                "ON u.user_auth = a.`authorization` " +
+                "WHERE u.email=:email";
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("email", email);

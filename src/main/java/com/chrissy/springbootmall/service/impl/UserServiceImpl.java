@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
         if (user != null) {
             log.warn("該 email {} 已被註冊。", userRegisterRequest.getEmail());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,userRegisterRequest.getEmail()+" 已被註冊。");
         }
         // 使用 hash 加密 user 密碼
         String hashedPwd = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         // 檢查 user 是否存在
         if (user == null) {
             log.warn("該 email {} 尚未註冊。",userLoginRequest.getEmail());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,userLoginRequest.getEmail()+" 尚未註冊。");
         }
         // 使用 MD5 生成密碼的雜湊值
         String hashedPwd = DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
             return user;
         } else {
             log.warn("email {} 的密碼輸入錯誤。",userLoginRequest.getEmail());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"密碼輸入錯誤。",new Throwable("Password verification failed."));
         }
 
     }
