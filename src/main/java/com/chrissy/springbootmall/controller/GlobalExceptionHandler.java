@@ -13,9 +13,9 @@ public class GlobalExceptionHandler {
         HttpStatus status = ex.getStatus();
         String reason = ex.getReason();
 
-        System.out.println("ex.getRawStatusCode()： "+ex.getRawStatusCode());
-        System.out.println("getReason()： "+ex.getReason());
-        System.out.println("ex.getCause().getMessage()： "+ex.getCause().getMessage());
+//        System.out.println("getRawStatusCode()： "+ex.getRawStatusCode());
+//        System.out.println("getReason()： "+ex.getReason());
+//        System.out.println("getCause().getMessage()： "+ex.getCause().getMessage());
 
 
         if (status == HttpStatus.BAD_REQUEST) {

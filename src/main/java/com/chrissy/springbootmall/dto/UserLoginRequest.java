@@ -9,7 +9,6 @@ public class UserLoginRequest {
     private String email;
     @NotBlank
     private String password;
-
     public String getEmail() {
         return email;
     }

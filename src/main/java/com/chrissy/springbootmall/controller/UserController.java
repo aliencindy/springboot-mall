@@ -39,16 +39,13 @@ public class UserController {
     public ModelAndView login(@ModelAttribute UserLoginRequest userLoginRequest,
                               Model model) throws JsonProcessingException {
 
-            model.addAttribute("userLoginRequest", userLoginRequest);
+        model.addAttribute("userLoginRequest", userLoginRequest);
 
-            User user = userService.login(userLoginRequest);
-            if (user == null) {
-                return new ModelAndView("error");
-            } else {
-                MyAddAttribute(user, model);// login、register重複的程式
-                return new ModelAndView("submit");
-            }
-        }
+        User user = userService.login(userLoginRequest);
+        MyAddAttribute(user, model);// login、register重複的程式
+
+        return new ModelAndView("submit");
+    }
 
 
     private void MyAddAttribute(User user, Model model) {

@@ -5,16 +5,34 @@
     <title>Register</title>
 </head>
 <body>
+<a href="/index">Go to Home Page.</a>&emsp;&emsp;<a href="/login">Go to Login Page.</a>
+</br>
+</br>
 <form th:action="@{/users/register}" method="post">
     <fieldset>
         <legend>Register</legend>
-        <lable for="RegisterEmail">Account:</lable>
+        <lable for="RegisterEmail">Email:</lable>
         <br>
-        <input type="text" name="email" th:field="${userRegisterRequest.email}"><br><br>
+        <input type="email" name="email" placeholder="請輸入信箱" th:field="${userRegisterRequest.email}" required><br><br>
 
         <lable for="RegisterPassword">Password:</lable>
         <br>
-        <input type="text" name="password" th:field="${userRegisterRequest.password}"><br><br>
+        <input type="password" name="password" placeholder="請輸入密碼" th:field="${userRegisterRequest.password}" required><br><br>
+
+        <lable for="Auth">Auth:</lable>
+        <br>
+        <select name="auth" required th:field="${userRegisterRequest.userAuth}" >
+            <option value="" style="display:none">請選擇權限</option>
+            　
+            <option value="Admin">Admin</option>
+            　
+            <option value="Operator">Operator</option>
+            　
+            <option value="Employee">Employee</option>
+
+        </select>
+        <br><br>
+        <!--        <input type="text" name="auth" th:field="${userRegisterRequest.userAuth}"><br><br>-->
 
         <input type="submit" value="submit">
     </fieldset>
